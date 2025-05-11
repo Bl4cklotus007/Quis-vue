@@ -1,0 +1,21 @@
+{
+  "name": "smp-quiz-app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "vercel-build": "vite build"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0",
+    "@popperjs/core": "^2.11.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^4.4.0",
+    "sass": "^1.69.0"
+  }
+}
