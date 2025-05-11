@@ -1,121 +1,121 @@
-# SMP Quiz App
+# Aplikasi Kuis SMP
 
-A modern web-based quiz application built with Vue.js for SMP (Junior High School) students. This application provides an interactive platform for students to test their knowledge through quizzes on various subjects.
+Aplikasi kuis berbasis web modern yang dibangun dengan Vue.js untuk siswa SMP. Aplikasi ini menyediakan platform interaktif bagi siswa untuk menguji pengetahuan mereka melalui kuis pada berbagai mata pelajaran.
 
-## Features
+## Fitur
 
-- 📚 Multiple subjects and materials
-- ✍️ Interactive quiz interface
-- ⏱️ Timer for each quiz session
-- 📊 Score tracking
-- 🎯 Immediate feedback on answers
-- 📱 Responsive design for all devices
-- 🔒 Admin panel for content management
+- 📚 Berbagai mata pelajaran dan materi
+- ✍️ Antarmuka kuis interaktif
+- ⏱️ Timer untuk setiap sesi kuis
+- 📊 Pelacakan skor
+- 🎯 Umpan balik langsung untuk jawaban
+- 📱 Desain responsif untuk semua perangkat
+- 🔒 Panel admin untuk manajemen konten
 
-## Tech Stack
+## Teknologi yang Digunakan
 
 - Vue.js 3
 - Vite
 - Bootstrap 5
-- LocalStorage for data persistence
+- LocalStorage untuk penyimpanan data
 
-## Live Demo
+## Demo Langsung
 
-Visit the live application at: [https://bl4cklotus007.github.io/Quis-vue/](https://bl4cklotus007.github.io/Quis-vue/)
+Kunjungi aplikasi langsung di: [https://bl4cklotus007.github.io/Quis-vue/](https://bl4cklotus007.github.io/Quis-vue/)
 
-## Getting Started
+## Memulai
 
-### Prerequisites
+### Persyaratan
 
-- Node.js (version 18 or higher)
-- npm (comes with Node.js)
+- Node.js (versi 18 atau lebih tinggi)
+- npm (termasuk dalam Node.js)
 
-### Installation
+### Instalasi
 
-1. Clone the repository:
+1. Clone repository:
 
    ```bash
    git clone https://github.com/Bl4cklotus007/Quis-vue.git
    ```
 
-2. Navigate to the project directory:
+2. Masuk ke direktori proyek:
 
    ```bash
    cd Quis-vue
    ```
 
-3. Install dependencies:
+3. Install dependensi:
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
+4. Jalankan server pengembangan:
 
    ```bash
    npm run dev
    ```
 
-5. Open your browser and visit:
+5. Buka browser dan kunjungi:
    ```
    http://localhost:3000
    ```
 
-## Project Structure
+## Struktur Proyek
 
 ```
 src/
-├── assets/        # Static assets
-├── components/    # Vue components
-├── views/         # Page components
-├── router/        # Vue Router configuration
-├── store/         # State management
-└── App.vue        # Root component
+├── assets/        # Aset statis
+├── components/    # Komponen Vue
+├── views/         # Komponen halaman
+├── router/        # Konfigurasi Vue Router
+├── store/         # Manajemen state
+└── App.vue        # Komponen utama
 ```
 
-## Usage
+## Penggunaan
 
-1. **Student Access**
+1. **Akses Siswa**
 
-   - Login with student credentials
-   - Browse available subjects
-   - Select a material to start a quiz
-   - Complete the quiz within the time limit
-   - View your score and performance
+   - Login dengan kredensial siswa
+   - Jelajahi mata pelajaran yang tersedia
+   - Pilih materi untuk memulai kuis
+   - Selesaikan kuis dalam batas waktu
+   - Lihat skor dan performa Anda
 
-2. **Admin Access**
-   - Login with admin credentials
-   - Manage subjects and materials
-   - Add, edit, or remove quiz questions
-   - Monitor student performance
+2. **Akses Admin**
+   - Login dengan kredensial admin
+   - Kelola mata pelajaran dan materi
+   - Tambah, edit, atau hapus soal kuis
+   - Pantau performa siswa
 
-## Contributing
+## Berkontribusi
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork repository
+2. Buat branch fitur baru (`git checkout -b fitur/FiturMenarik`)
+3. Commit perubahan Anda (`git commit -m 'Menambahkan Fitur Menarik'`)
+4. Push ke branch (`git push origin fitur/FiturMenarik`)
+5. Buat Pull Request
 
-## License
+## Lisensi
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detailnya.
 
-## Acknowledgments
+## Ucapan Terima Kasih
 
-- Vue.js team for the amazing framework
-- Bootstrap team for the UI components
-- All contributors who have helped improve this project
+- Tim Vue.js untuk framework yang luar biasa
+- Tim Bootstrap untuk komponen UI
+- Semua kontributor yang telah membantu meningkatkan proyek ini
 
-## Contact
+## Kontak
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter)
+Nama Anda - [@twitter_anda](https://twitter.com/twitter_anda)
 
-Project Link: [https://github.com/Bl4cklotus007/Quis-vue](https://github.com/Bl4cklotus007/Quis-vue)
+Link Proyek: [https://github.com/Bl4cklotus007/Quis-vue](https://github.com/Bl4cklotus007/Quis-vue)
 
-## API Endpoints
+## Endpoint API
 
-### Auth
+### Autentikasi
 
 - POST /api/auth/login
 - POST /api/auth/register
