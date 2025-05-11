@@ -13,5 +13,14 @@ export default defineConfig({
     port: 3000,
     open: true
   },
-  base: '/Quis-vue/'
+  base: '/Quis-vue/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  }
 })
