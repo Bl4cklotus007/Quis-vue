@@ -21,7 +21,7 @@ Aplikasi kuis berbasis web modern yang dibangun dengan Vue.js untuk siswa SMP. A
 
 ## Demo Langsung
 
-Kunjungi aplikasi langsung di: [https://bl4cklotus007.github.io/Quis-vue/](https://bl4cklotus007.github.io/Quis-vue/)
+Kunjungi aplikasi langsung di: (https://vercel.com/riyan-maulanas-projects/quis-vue)
 
 ## Memulai
 
@@ -106,12 +106,6 @@ Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) unt
 - Tim Vue.js untuk framework yang luar biasa
 - Tim Bootstrap untuk komponen UI
 - Semua kontributor yang telah membantu meningkatkan proyek ini
-
-## Kontak
-
-Nama Anda - [@twitter_anda](https://twitter.com/twitter_anda)
-
-Link Proyek: [https://github.com/Bl4cklotus007/Quis-vue](https://github.com/Bl4cklotus007/Quis-vue)
 
 ## Endpoint API
 
