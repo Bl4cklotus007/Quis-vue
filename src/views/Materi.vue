@@ -107,10 +107,9 @@ onMounted(() => {
 
 const startQuiz = (materialId) => {
   console.log('Starting quiz for material:', materialId) // Debug log
-  router.push({ 
-    name: 'kuis', 
-    query: { materi: materialId },
-    params: { id: materialId }
+  router.push({
+    name: 'quiz',
+    query: { materi: materialId }
   })
 }
 
