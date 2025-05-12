@@ -3,8 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 export default defineConfig(({ command, mode }) => {
-  // Use root base in development, and /Quis-vue/ in production
-  const base = mode === 'production' ? '/Quis-vue/' : '/'
+  // Determine base URL: root on Vercel or development, '/Quis-vue/' for GitHub Pages
+  const isVercel = !!process.env.VERCEL;
+  const base = isVercel ? '/' : (mode === 'production' ? '/Quis-vue/' : '/')
 
   return {
     base,
