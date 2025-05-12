@@ -19,8 +19,6 @@ Aplikasi kuis berbasis web modern yang dibangun dengan Vue.js untuk siswa SMP. A
 - Bootstrap 5
 - LocalStorage untuk penyimpanan data
 
-## Demo Langsung
-
 Kunjungi aplikasi langsung di: (https://quis-l3fczso1a-riyan-maulanas-projects.vercel.app/)
 
 ## Memulai

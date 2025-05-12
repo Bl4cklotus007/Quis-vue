@@ -7,13 +7,10 @@
           <i class="bi bi-mortarboard-fill display-4 text-primary me-3"></i>
           <div>
             <h1 class="mb-0">Dashboard</h1>
-            <p class="text-muted mb-0">Selamat datang, {{ user?.username }}</p>
+            <p class="text-muted mb-0">Selamat datang, {{ user?.email }}</p>
           </div>
         </div>
         <div>
-          <router-link to="/admin" class="btn btn-outline-primary me-2" v-if="isAdmin">
-            <i class="bi bi-gear me-2"></i>Admin Panel
-          </router-link>
           <button @click="handleLogout" class="btn btn-outline-danger">
             <i class="bi bi-box-arrow-right me-2"></i>Logout
           </button>

@@ -23,15 +23,15 @@
               <form @submit.prevent="handleLogin" class="needs-validation" novalidate>
                 <div class="form-floating mb-3">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    id="username"
-                    v-model="username"
+                    id="email"
+                    v-model="email"
                     required
-                    placeholder="Username"
+                    placeholder="Email"
                     :disabled="loading"
                   />
-                  <label for="username">Username</label>
+                  <label for="email">Email</label>
                 </div>
                 
                 <div class="form-floating mb-3">
@@ -89,7 +89,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const username = ref('')
+const email = ref('')
 const password = ref('')
 const role = ref('student')
 const loading = ref(false)
@@ -104,11 +104,11 @@ const handleLogin = async () => {
     // In production, this should be replaced with actual API calls
     const validCredentials = {
       student: {
-        username: 'siswa',
+        email: 'siswa',
         password: 'siswa123'
       },
       admin: {
-        username: 'admin',
+        email: 'admin',
         password: 'admin123'
       }
     }
@@ -116,10 +116,10 @@ const handleLogin = async () => {
     const selectedRole = role.value
     const validCredential = validCredentials[selectedRole]
 
-    if (username.value === validCredential.username && password.value === validCredential.password) {
+    if (email.value === validCredential.email && password.value === validCredential.password) {
       // Store user data in localStorage
       const userData = {
-        username: username.value,
+        email: email.value,
         role: selectedRole
       }
       localStorage.setItem('user', JSON.stringify(userData))
@@ -132,7 +132,7 @@ const handleLogin = async () => {
         router.push('/dashboard')
       }
     } else {
-      error.value = 'Username atau password salah'
+      error.value = 'Email atau password salah'
     }
   } catch (err) {
     error.value = 'Terjadi kesalahan saat login'

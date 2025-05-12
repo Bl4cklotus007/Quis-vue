@@ -23,13 +23,7 @@ const router = createRouter({
     {
       path: '/quiz',
       name: 'quiz',
-      component: () => import('../views/Quiz.vue'),
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: () => import('../views/Admin.vue'),
+      component: () => import('../views/Kuis.vue'),
       meta: { requiresAuth: true }
     }
   ]
