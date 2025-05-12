@@ -21,7 +21,7 @@ Aplikasi kuis berbasis web modern yang dibangun dengan Vue.js untuk siswa SMP. A
 
 ## Demo Langsung
 
-Kunjungi aplikasi langsung di: (https://vercel.com/riyan-maulanas-projects/quis-vue)
+Kunjungi aplikasi langsung di: (https://quis-l3fczso1a-riyan-maulanas-projects.vercel.app/)
 
 ## Memulai
 
