@@ -1,47 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
-import Dashboard from '../views/Dashboard.vue'
-import Materi from '../views/Materi.vue'
-import Kuis from '../views/Kuis.vue'
-import Skor from '../views/Skor.vue'
-import Admin from '../views/Admin.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: Login
+      name: 'home',
+      component: () => import('../views/Login.vue')
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard,
+      component: () => import('../views/Dashboard.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/materi',
       name: 'materi',
-      component: Materi,
+      component: () => import('../views/Materi.vue'),
       meta: { requiresAuth: true }
     },
     {
-      path: '/kuis',
-      name: 'kuis',
-      component: Kuis,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/skor',
-      name: 'skor',
-      component: Skor,
+      path: '/quiz',
+      name: 'quiz',
+      component: () => import('../views/Quiz.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/admin',
       name: 'admin',
-      component: Admin,
+      component: () => import('../views/Admin.vue'),
       meta: { requiresAuth: true }
     }
   ]
@@ -56,7 +44,7 @@ router.beforeEach((to, from, next) => {
     next('/')
   }
   // If user is authenticated and trying to access login page
-  else if (to.name === 'login' && isAuthenticated) {
+  else if (to.name === 'home' && isAuthenticated) {
     next({ name: 'dashboard' })
   }
   // Otherwise proceed
