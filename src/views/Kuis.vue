@@ -121,6 +121,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
 import { useRouter, useRoute } from 'vue-router'
+import { soalAPI } from '@/services/api.js'
 
 const router = useRouter()
 const route = useRoute()
@@ -170,112 +171,6 @@ const currentSubject = computed(() => {
   return subjects.find(s => s.materiId === materiId)
 })
 
-// Dummy questions per materi
-const materiQuestions = {
-  1: [ // Matematika - Aljabar
-    {
-      question: 'Berapakah hasil dari 2x + 3 = 7?',
-      options: ['x = 1', 'x = 2', 'x = 3', 'x = 4'],
-      correctAnswer: 'x = 2'
-    },
-    {
-      question: 'Sederhanakan persamaan: 3x + 2 = 8',
-      options: ['x = 1', 'x = 2', 'x = 3', 'x = 4'],
-      correctAnswer: 'x = 2'
-    },
-    {
-      question: 'Berapakah nilai x dari persamaan: 4x - 5 = 11',
-      options: ['x = 3', 'x = 4', 'x = 5', 'x = 6'],
-      correctAnswer: 'x = 4'
-    }
-  ],
-  3: [ // IPA - Tata Surya
-    {
-      question: 'Planet terbesar dalam tata surya adalah...',
-      options: ['Bumi', 'Mars', 'Jupiter', 'Saturnus'],
-      correctAnswer: 'Jupiter'
-    },
-    {
-      question: 'Planet yang memiliki cincin adalah...',
-      options: ['Jupiter', 'Saturnus', 'Uranus', 'Neptunus'],
-      correctAnswer: 'Saturnus'
-    },
-    {
-      question: 'Planet terdekat dengan matahari adalah...',
-      options: ['Venus', 'Merkurius', 'Mars', 'Bumi'],
-      correctAnswer: 'Merkurius'
-    }
-  ],
-  4: [ // IPS - Sejarah Kemerdekaan
-    {
-      question: 'Kapan Proklamasi Kemerdekaan Indonesia dibacakan?',
-      options: ['16 Agustus 1945', '17 Agustus 1945', '18 Agustus 1945', '19 Agustus 1945'],
-      correctAnswer: '17 Agustus 1945'
-    },
-    {
-      question: 'Siapa yang mengetik naskah proklamasi?',
-      options: ['Sayuti Melik', 'Sukarni', 'B.M. Diah', 'Latief Hendraningrat'],
-      correctAnswer: 'Sayuti Melik'
-    },
-    {
-      question: 'Di mana teks proklamasi disusun?',
-      options: ['Rengasdengklok', 'Jakarta', 'Yogyakarta', 'Bandung'],
-      correctAnswer: 'Jakarta'
-    }
-  ],
-  5: [ // Bahasa Indonesia - Teks Narasi
-    {
-      question: 'Teks narasi adalah teks yang...',
-      options: ['Menjelaskan sesuatu', 'Menceritakan peristiwa', 'Mengajak pembaca', 'Menggambarkan objek'],
-      correctAnswer: 'Menceritakan peristiwa'
-    },
-    {
-      question: 'Berikut ini yang bukan termasuk jenis teks narasi adalah...',
-      options: ['Narasi Ekspositoris', 'Narasi Sugestif', 'Narasi Deskriptif', 'Narasi Artistik'],
-      correctAnswer: 'Narasi Deskriptif'
-    },
-    {
-      question: 'Teks narasi yang bertujuan memberikan informasi disebut...',
-      options: ['Narasi Sugestif', 'Narasi Artistik', 'Narasi Ekspositoris', 'Narasi Informatif'],
-      correctAnswer: 'Narasi Ekspositoris'
-    }
-  ],
-  6: [ // Bahasa Inggris - Simple Present
-    {
-      question: 'She ___ to school every day.',
-      options: ['go', 'goes', 'going', 'went'],
-      correctAnswer: 'goes'
-    },
-    {
-      question: 'They ___ not like coffee.',
-      options: ['do', 'does', 'doing', 'did'],
-      correctAnswer: 'do'
-    },
-    {
-      question: '___ he play football?',
-      options: ['Do', 'Does', 'Is', 'Are'],
-      correctAnswer: 'Does'
-    }
-  ],
-  7: [ // Pendidikan Agama - Akhlak
-    {
-      question: 'Berikut ini yang termasuk akhlak terpuji adalah...',
-      options: ['Jujur', 'Dusta', 'Sombong', 'Riya'],
-      correctAnswer: 'Jujur'
-    },
-    {
-      question: 'Menepati janji termasuk akhlak...',
-      options: ['Mazmumah', 'Terpuji', 'Tercela', 'Biasa'],
-      correctAnswer: 'Terpuji'
-    },
-    {
-      question: 'Sikap rendah hati disebut juga...',
-      options: ['Tawadhu', 'Taqwa', 'Istiqomah', 'Amanah'],
-      correctAnswer: 'Tawadhu'
-    }
-  ]
-}
-
 const quizStarted = ref(false)
 const currentQuestionIndex = ref(0)
 const selectedAnswer = ref('')
@@ -292,19 +187,22 @@ const score = ref(0)
 const correctAnswers = ref(0)
 const userAnswers = ref([]) // Menyimpan jawaban user untuk setiap soal
 
-onMounted(() => {
+onMounted(async () => {
   modal = new Modal(resultModal.value)
-  
   // Redirect to dashboard if no material is selected
   if (!selectedMateriId.value) {
     router.push('/dashboard')
     return
   }
-
-  // Set questions based on selected material
-  questions.value = materiQuestions[selectedMateriId.value] || []
-  // Inisialisasi array jawaban
-  userAnswers.value = new Array(questions.value.length).fill(null)
+  // Fetch questions from API
+  try {
+    const res = await soalAPI.getByMateri(selectedMateriId.value)
+    questions.value = res.data
+    // Inisialisasi array jawaban
+    userAnswers.value = new Array(questions.value.length).fill(null)
+  } catch (err) {
+    console.error('Gagal load soal:', err)
+  }
 })
 
 const startQuiz = () => {

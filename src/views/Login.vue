@@ -47,20 +47,6 @@
                   <label for="password">Password</label>
                 </div>
                 
-                <div class="form-floating mb-4">
-                  <select 
-                    class="form-select" 
-                    id="role" 
-                    v-model="role" 
-                    required 
-                    :disabled="loading"
-                  >
-                    <option value="student">Siswa</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                  <label for="role">Login Sebagai</label>
-                </div>
-
                 <button 
                   type="submit" 
                   class="btn btn-primary w-100 py-2" 
@@ -87,11 +73,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { authAPI } from '@/services/api.js'
 
 const router = useRouter()
 const email = ref('')
 const password = ref('')
-const role = ref('student')
 const loading = ref(false)
 const error = ref('')
 
@@ -99,43 +85,13 @@ const handleLogin = async () => {
   try {
     loading.value = true
     error.value = ''
-    
-    // For demo purposes, using hardcoded credentials
-    // In production, this should be replaced with actual API calls
-    const validCredentials = {
-      student: {
-        email: 'siswa',
-        password: 'siswa123'
-      },
-      admin: {
-        email: 'admin',
-        password: 'admin123'
-      }
-    }
-
-    const selectedRole = role.value
-    const validCredential = validCredentials[selectedRole]
-
-    if (email.value === validCredential.email && password.value === validCredential.password) {
-      // Store user data in localStorage
-      const userData = {
-        email: email.value,
-        role: selectedRole
-      }
-      localStorage.setItem('user', JSON.stringify(userData))
-      localStorage.setItem('token', 'demo-token-' + Date.now()) // In production, use actual JWT token
-      
-      // Redirect based on role
-      if (selectedRole === 'admin') {
-        router.push('/admin')
-      } else {
-        router.push('/dashboard')
-      }
-    } else {
-      error.value = 'Email atau password salah'
-    }
+    const response = await authAPI.login({ email: email.value, password: password.value })
+    const { token, user } = response.data
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(user))
+    router.push('/dashboard')
   } catch (err) {
-    error.value = 'Terjadi kesalahan saat login'
+    error.value = err.response?.data?.message || 'Terjadi kesalahan saat login'
     console.error('Login error:', err)
   } finally {
     loading.value = false

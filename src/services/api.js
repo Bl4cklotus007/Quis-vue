@@ -1,14 +1,16 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3001/api' : '/api')
+// Use Vite proxy for API calls in development
+const API_URL = import.meta.env.DEV
+  ? '/api'
+  : (import.meta.env.VITE_API_URL || '/api')
 
 // Create axios instance
 const api = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
-  },
-  withCredentials: true // Enable sending cookies in cross-origin requests
+  }
 })
 
 // Add token to requests

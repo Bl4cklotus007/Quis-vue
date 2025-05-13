@@ -53,6 +53,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { materiAPI } from '@/services/api.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -67,42 +68,19 @@ const subjects = {
   6: 'Pendidikan Agama'
 }
 
-// Dummy materials for each subject
-const allMaterials = [
-  // Matematika
-  { id: 101, subjectId: 1, title: 'Pengenalan Aljabar', description: 'Materi dasar tentang konsep aljabar dan persamaan linear.' },
-  { id: 102, subjectId: 1, title: 'Geometri Dasar', description: 'Mempelajari bentuk-bentuk geometri dan perhitungannya.' },
-  { id: 103, subjectId: 1, title: 'Statistika Dasar', description: 'Pengenalan statistik dan cara membaca data.' },
-  // IPA
-  { id: 201, subjectId: 2, title: 'Sistem Tata Surya', description: 'Mengenal planet dan benda langit dalam tata surya.' },
-  { id: 202, subjectId: 2, title: 'Sistem Pencernaan', description: 'Mempelajari organ dan proses pencernaan manusia.' },
-  { id: 203, subjectId: 2, title: 'Perubahan Wujud Zat', description: 'Mengenal perubahan wujud zat dan contohnya.' },
-  // IPS
-  { id: 301, subjectId: 3, title: 'Sejarah Kemerdekaan', description: 'Peristiwa penting dalam sejarah kemerdekaan Indonesia.' },
-  { id: 302, subjectId: 3, title: 'Peta dan Atlas', description: 'Belajar membaca peta dan atlas.' },
-  { id: 303, subjectId: 3, title: 'Kegiatan Ekonomi', description: 'Jenis-jenis kegiatan ekonomi di masyarakat.' },
-  // Bahasa Indonesia
-  { id: 401, subjectId: 4, title: 'Teks Narasi', description: 'Pengertian dan contoh teks narasi.' },
-  { id: 402, subjectId: 4, title: 'Teks Deskripsi', description: 'Mengenal ciri dan struktur teks deskripsi.' },
-  { id: 403, subjectId: 4, title: 'Puisi', description: 'Belajar membuat dan memahami puisi.' },
-  // Bahasa Inggris
-  { id: 501, subjectId: 5, title: 'Simple Present Tense', description: 'Penggunaan simple present tense dalam kalimat.' },
-  { id: 502, subjectId: 5, title: 'Vocabulary: Animals', description: 'Kosakata bahasa Inggris tentang hewan.' },
-  { id: 503, subjectId: 5, title: 'Daily Activities', description: 'Menyusun kalimat tentang aktivitas sehari-hari.' },
-  // Pendidikan Agama
-  { id: 601, subjectId: 6, title: 'Akhlak Terpuji', description: 'Contoh akhlak terpuji dalam kehidupan sehari-hari.' },
-  { id: 602, subjectId: 6, title: 'Rukun Islam', description: 'Penjelasan tentang lima rukun Islam.' },
-  { id: 603, subjectId: 6, title: 'Kisah Nabi', description: 'Kisah-kisah teladan dari para nabi.' },
-]
-
 const getSubjectName = () => {
   const subjectId = parseInt(route.query.subject)
   return subjects[subjectId] || 'Mata Pelajaran'
 }
 
-onMounted(() => {
-  const subjectId = parseInt(route.query.subject)
-  materials.value = allMaterials.filter(m => m.subjectId === subjectId)
+onMounted(async () => {
+  try {
+    const subjectId = parseInt(route.query.subject)
+    const res = await materiAPI.getBySubject(subjectId)
+    materials.value = res.data
+  } catch (err) {
+    console.error('Gagal load materi:', err)
+  }
 })
 
 const startQuiz = (materialId) => {

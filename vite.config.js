@@ -16,8 +16,17 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     server: {
-      port: 3000,
-      open: true
+      host: '0.0.0.0',
+      port: 3002,
+      strictPort: true, // fail if port is already in use
+      open: true,
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:3001',
+          changeOrigin: true,
+          secure: false
+        }
+      }
     },
     build: {
       outDir: 'dist',
